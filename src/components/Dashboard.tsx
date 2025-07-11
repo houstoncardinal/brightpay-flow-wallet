@@ -111,15 +111,29 @@ const Dashboard = () => {
                 </div>
               </div>
               <div className="flex gap-2">
-                <Button size="sm" className="flex-1 h-8 bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white text-xs">
+                <Button 
+                  size="sm" 
+                  onClick={() => navigate('/send')}
+                  className="flex-1 h-8 bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white text-xs"
+                >
                   <Send className="h-3 w-3 mr-1" />
                   Send
                 </Button>
-                <Button size="sm" variant="outline" className="flex-1 h-8 border-emerald-200 text-emerald-600 hover:bg-emerald-50 text-xs">
+                <Button 
+                  size="sm" 
+                  variant="outline" 
+                  onClick={() => navigate('/request')}
+                  className="flex-1 h-8 border-emerald-200 text-emerald-600 hover:bg-emerald-50 text-xs"
+                >
                   <ArrowDown className="h-3 w-3 mr-1" />
                   Request
                 </Button>
-                <Button size="sm" variant="outline" className="h-8 w-8 p-0 border-gray-200">
+                <Button 
+                  size="sm" 
+                  variant="outline" 
+                  onClick={() => navigate('/send')}
+                  className="h-8 w-8 p-0 border-gray-200"
+                >
                   <Plus className="h-3 w-3" />
                 </Button>
               </div>
