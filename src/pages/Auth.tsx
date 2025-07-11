@@ -42,31 +42,31 @@ const Auth = () => {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-background p-4">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-emerald-50 p-4">
       <div className="w-full max-w-md">
-        <div className="text-center mb-8">
-          <h1 className="text-4xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent mb-2">
+        <div className="text-center mb-8 animate-fade-in">
+          <h1 className="text-5xl font-bold gradient-professional bg-clip-text text-transparent mb-3">
             BrightPay
           </h1>
-          <p className="text-muted-foreground">The future of peer-to-peer finance</p>
+          <p className="text-muted-foreground text-lg">Professional peer-to-peer finance</p>
         </div>
 
-        <Card className="glass border-primary/20 neon-glow">
-          <CardHeader className="text-center">
-            <CardTitle className="text-foreground">Welcome</CardTitle>
-            <CardDescription>Sign in to your account or create a new one</CardDescription>
+        <Card className="glass-card border-0 shadow-2xl hover-lift animate-slide-up">
+          <CardHeader className="text-center pb-6">
+            <CardTitle className="text-2xl font-semibold text-foreground">Welcome Back</CardTitle>
+            <CardDescription className="text-base">Sign in to your account or create a new one</CardDescription>
           </CardHeader>
-          <CardContent>
+          <CardContent className="space-y-6">
             <Tabs defaultValue="signin" className="w-full">
-              <TabsList className="grid w-full grid-cols-2 mb-6">
-                <TabsTrigger value="signin">Sign In</TabsTrigger>
-                <TabsTrigger value="signup">Sign Up</TabsTrigger>
+              <TabsList className="grid w-full grid-cols-2 mb-8 bg-muted/50">
+                <TabsTrigger value="signin" className="data-[state=active]:bg-white data-[state=active]:shadow-sm">Sign In</TabsTrigger>
+                <TabsTrigger value="signup" className="data-[state=active]:bg-white data-[state=active]:shadow-sm">Sign Up</TabsTrigger>
               </TabsList>
               
-              <TabsContent value="signin">
-                <form onSubmit={handleSignIn} className="space-y-4">
-                  <div>
-                    <Label htmlFor="signin-email">Email</Label>
+              <TabsContent value="signin" className="space-y-6">
+                <form onSubmit={handleSignIn} className="space-y-5">
+                  <div className="space-y-2">
+                    <Label htmlFor="signin-email" className="text-sm font-medium">Email Address</Label>
                     <Input
                       id="signin-email"
                       type="email"
@@ -74,11 +74,11 @@ const Auth = () => {
                       onChange={(e) => setEmail(e.target.value)}
                       placeholder="Enter your email"
                       required
-                      className="bg-input border-primary/30 focus:border-primary"
+                      className="h-12 bg-white border-2 border-gray-200 focus:border-blue-400 hover:border-gray-300 transition-colors rounded-lg"
                     />
                   </div>
-                  <div>
-                    <Label htmlFor="signin-password">Password</Label>
+                  <div className="space-y-2">
+                    <Label htmlFor="signin-password" className="text-sm font-medium">Password</Label>
                     <Input
                       id="signin-password"
                       type="password"
@@ -86,30 +86,30 @@ const Auth = () => {
                       onChange={(e) => setPassword(e.target.value)}
                       placeholder="Enter your password"
                       required
-                      className="bg-input border-primary/30 focus:border-primary"
+                      className="h-12 bg-white border-2 border-gray-200 focus:border-blue-400 hover:border-gray-300 transition-colors rounded-lg"
                     />
                   </div>
                   <Button 
                     type="submit" 
-                    className="w-full neon-glow"
+                    className="w-full h-12 bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white font-medium rounded-lg glow-blue hover-scale"
                     disabled={isSubmitting}
                   >
                     {isSubmitting ? (
                       <>
-                        <Loader className="h-4 w-4 animate-spin mr-2" />
+                        <Loader className="h-5 w-5 animate-spin mr-2" />
                         Signing in...
                       </>
                     ) : (
-                      'Sign In'
+                      'Sign In to BrightPay'
                     )}
                   </Button>
                 </form>
               </TabsContent>
               
-              <TabsContent value="signup">
-                <form onSubmit={handleSignUp} className="space-y-4">
-                  <div>
-                    <Label htmlFor="signup-email">Email</Label>
+              <TabsContent value="signup" className="space-y-6">
+                <form onSubmit={handleSignUp} className="space-y-5">
+                  <div className="space-y-2">
+                    <Label htmlFor="signup-email" className="text-sm font-medium">Email Address</Label>
                     <Input
                       id="signup-email"
                       type="email"
@@ -117,34 +117,34 @@ const Auth = () => {
                       onChange={(e) => setEmail(e.target.value)}
                       placeholder="Enter your email"
                       required
-                      className="bg-input border-primary/30 focus:border-primary"
+                      className="h-12 bg-white border-2 border-gray-200 focus:border-emerald-400 hover:border-gray-300 transition-colors rounded-lg"
                     />
                   </div>
-                  <div>
-                    <Label htmlFor="signup-password">Password</Label>
+                  <div className="space-y-2">
+                    <Label htmlFor="signup-password" className="text-sm font-medium">Password</Label>
                     <Input
                       id="signup-password"
                       type="password"
                       value={password}
                       onChange={(e) => setPassword(e.target.value)}
-                      placeholder="Create a password"
+                      placeholder="Create a strong password"
                       required
                       minLength={6}
-                      className="bg-input border-primary/30 focus:border-primary"
+                      className="h-12 bg-white border-2 border-gray-200 focus:border-emerald-400 hover:border-gray-300 transition-colors rounded-lg"
                     />
                   </div>
                   <Button 
                     type="submit" 
-                    className="w-full neon-glow"
+                    className="w-full h-12 bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-600 hover:to-emerald-700 text-white font-medium rounded-lg glow-green hover-scale"
                     disabled={isSubmitting}
                   >
                     {isSubmitting ? (
                       <>
-                        <Loader className="h-4 w-4 animate-spin mr-2" />
+                        <Loader className="h-5 w-5 animate-spin mr-2" />
                         Creating account...
                       </>
                     ) : (
-                      'Create Account'
+                      'Create Your Account'
                     )}
                   </Button>
                 </form>
