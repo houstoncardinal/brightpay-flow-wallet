@@ -6,6 +6,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Avatar, AvatarFallback } from '@/components/ui/avatar';
 import { Badge } from '@/components/ui/badge';
+import MobileBottomNav from '@/components/MobileBottomNav';
 import { 
   ArrowLeft, Search, QrCode, Users, 
   DollarSign, Send, Clock, Star
@@ -46,9 +47,10 @@ const SendPage = () => {
               <h1 className="text-xl font-bold text-foreground">Send Money</h1>
               <p className="text-sm text-muted-foreground">Quick and secure transfers</p>
             </div>
-          </div>
         </div>
       </div>
+      <MobileBottomNav />
+    </div>
 
       <div className="p-4 space-y-6">
         {/* Amount Input */}

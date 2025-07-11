@@ -8,64 +8,69 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    /* BrightPay Professional Clean Design System */
-    /* Clean white interface with green/blue glowing accents */
+    /* Luxury Futuristic Design System */
     --background: 0 0% 100%;
-    --foreground: 222 15% 12%;
+    --foreground: 220 15% 8%;
 
     --card: 0 0% 100%;
-    --card-foreground: 222 15% 12%;
+    --card-foreground: 220 15% 8%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 222 15% 12%;
+    --popover-foreground: 220 15% 8%;
 
-    /* Professional Blue Primary */
-    --primary: 217 91% 60%;
+    /* Luxury Blue-Purple Primary */
+    --primary: 235 85% 60%;
     --primary-foreground: 0 0% 100%;
+    --primary-light: 235 85% 75%;
+    --primary-glow: 235 85% 90%;
 
-    /* Clean Green Secondary */
-    --secondary: 142 76% 36%;
+    /* Luxury Emerald Secondary */
+    --secondary: 158 85% 45%;
     --secondary-foreground: 0 0% 100%;
+    --secondary-light: 158 85% 65%;
 
-    --muted: 210 40% 96%;
-    --muted-foreground: 215 16% 47%;
+    /* Neutral Luxury Tones */
+    --muted: 220 15% 97%;
+    --muted-foreground: 220 10% 40%;
 
-    /* Emerald Accent */
-    --accent: 160 84% 39%;
+    /* Luxury Accent Colors */
+    --accent: 280 85% 65%;
     --accent-foreground: 0 0% 100%;
 
-    --destructive: 0 84% 60%;
+    --destructive: 0 85% 60%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 214 32% 91%;
+    --border: 220 15% 92%;
     --input: 0 0% 100%;
-    --ring: 217 91% 60%;
+    --ring: 235 85% 60%;
 
-    --radius: 0.75rem;
+    --radius: 1rem;
 
-    /* Professional glow colors */
-    --glow-blue: 217 91% 60%;
-    --glow-green: 142 76% 36%;
-    --glow-emerald: 160 84% 39%;
-    --glow-cyan: 188 94% 43%;
+    /* Luxury Glow Effects */
+    --glow-primary: 235 85% 60%;
+    --glow-secondary: 158 85% 45%;
+    --glow-accent: 280 85% 65%;
+    --glow-luxury: 45 100% 70%;
     
-    /* Professional gradients */
-    --gradient-primary: linear-gradient(135deg, hsl(217 91% 60%), hsl(142 76% 36%));
-    --gradient-accent: linear-gradient(90deg, hsl(160 84% 39%), hsl(188 94% 43%));
+    /* Luxury Gradients */
+    --gradient-luxury: linear-gradient(135deg, hsl(235 85% 60%), hsl(280 85% 65%), hsl(158 85% 45%));
+    --gradient-glass: linear-gradient(135deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.05));
+    --gradient-frosted: linear-gradient(135deg, rgba(255, 255, 255, 0.25), rgba(255, 255, 255, 0.1));
     
-    /* Professional glass effect */
-    --glass-bg: rgba(255, 255, 255, 0.7);
-    --glass-border: rgba(59, 130, 246, 0.15);
+    /* Luxury Glass Effects */
+    --glass-bg: rgba(255, 255, 255, 0.08);
+    --glass-border: rgba(235, 140, 255, 0.2);
+    --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
     
     /* Sidebar */
     --sidebar-background: 0 0% 100%;
-    --sidebar-foreground: 222 15% 12%;
-    --sidebar-primary: 217 91% 60%;
+    --sidebar-foreground: 220 15% 8%;
+    --sidebar-primary: 235 85% 60%;
     --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 210 40% 96%;
-    --sidebar-accent-foreground: 222 15% 12%;
-    --sidebar-border: 214 32% 91%;
-    --sidebar-ring: 217 91% 60%;
+    --sidebar-accent: 220 15% 97%;
+    --sidebar-accent-foreground: 220 15% 8%;
+    --sidebar-border: 220 15% 92%;
+    --sidebar-ring: 235 85% 60%;
   }
 
   .dark {
