@@ -40,9 +40,10 @@ const RequestPage = () => {
               <h1 className="text-xl font-bold text-foreground">Request Money</h1>
               <p className="text-sm text-muted-foreground">Create a payment request</p>
             </div>
-          </div>
         </div>
       </div>
+      <MobileBottomNav />
+    </div>
 
       <div className="p-4 space-y-6">
         {/* Amount Input */}
