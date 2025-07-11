@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useAuth } from '@/contexts/AuthContext';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -11,9 +12,12 @@ import {
   ChevronRight, DollarSign, PieChart, BarChart3, Settings
 } from 'lucide-react';
 
+import MobileNavbar from './MobileNavbar';
+
 const Dashboard = () => {
   const { user, signOut } = useAuth();
   const [balanceVisible, setBalanceVisible] = useState(true);
+  const navigate = useNavigate();
 
   const mockBalance = "$2,847.50";
   const mockSavings = "$1,234.89";
@@ -29,10 +33,10 @@ const Dashboard = () => {
   ];
 
   const quickActions = [
-    { icon: Send, label: 'Send', color: 'blue', count: 3 },
-    { icon: ArrowDown, label: 'Request', color: 'emerald', count: 1 },
-    { icon: QrCode, label: 'Scan', color: 'purple', count: null },
-    { icon: Users, label: 'Split', color: 'cyan', count: 2 },
+    { icon: Send, label: 'Send', color: 'blue', count: 3, path: '/send' },
+    { icon: ArrowDown, label: 'Request', color: 'emerald', count: 1, path: '/request' },
+    { icon: QrCode, label: 'Scan', color: 'purple', count: null, path: '/scan' },
+    { icon: Users, label: 'Split', color: 'cyan', count: 2, path: '/contacts' },
   ];
 
   const stats = [
@@ -147,7 +151,11 @@ const Dashboard = () => {
         {/* Quick Actions */}
         <div className="grid grid-cols-4 gap-3">
           {quickActions.map((action, index) => (
-            <Card key={index} className="glass-card border-0 shadow-md hover-lift cursor-pointer group">
+            <Card 
+              key={index} 
+              onClick={() => navigate(action.path)}
+              className="glass-card border-0 shadow-md hover-lift cursor-pointer group"
+            >
               <CardContent className="p-4 text-center">
                 <div className={`w-10 h-10 mx-auto mb-2 rounded-lg bg-gradient-to-r ${
                   action.color === 'blue' ? 'from-blue-400 to-blue-500' :
