@@ -19,7 +19,7 @@ const Dashboard = () => {
   const [balanceVisible, setBalanceVisible] = useState(true);
   const navigate = useNavigate();
 
-  const mockBalance = "$2,847.50";
+  const mockBalance = "$11,522";
   const mockSavings = "$1,234.89";
   const mockSpending = "$567.23";
   
@@ -146,34 +146,6 @@ const Dashboard = () => {
               ))}
             </CardContent>
           </Card>
-        </div>
-
-        {/* Quick Actions */}
-        <div className="grid grid-cols-4 gap-3">
-          {quickActions.map((action, index) => (
-            <Card 
-              key={index} 
-              onClick={() => navigate(action.path)}
-              className="glass-card border-0 shadow-md hover-lift cursor-pointer group"
-            >
-              <CardContent className="p-4 text-center">
-                <div className={`w-10 h-10 mx-auto mb-2 rounded-lg bg-gradient-to-r ${
-                  action.color === 'blue' ? 'from-blue-400 to-blue-500' :
-                  action.color === 'emerald' ? 'from-emerald-400 to-emerald-500' :
-                  action.color === 'purple' ? 'from-purple-400 to-purple-500' :
-                  'from-cyan-400 to-cyan-500'
-                } flex items-center justify-center group-hover:scale-110 transition-transform relative`}>
-                  <action.icon className="h-5 w-5 text-white" />
-                  {action.count && (
-                    <Badge className="absolute -top-1 -right-1 h-4 w-4 p-0 text-xs bg-red-500 text-white">
-                      {action.count}
-                    </Badge>
-                  )}
-                </div>
-                <p className="text-xs font-medium text-foreground">{action.label}</p>
-              </CardContent>
-            </Card>
-          ))}
         </div>
 
         {/* Transactions */}
