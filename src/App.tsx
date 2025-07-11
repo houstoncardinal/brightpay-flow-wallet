@@ -12,6 +12,7 @@ import Scan from "./pages/Scan";
 import Contacts from "./pages/Contacts";
 import Activity from "./pages/Activity";
 import Request from "./pages/Request";
+import TransactionDetails from "./pages/TransactionDetails";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -53,6 +54,11 @@ const App = () => (
             <Route path="/request" element={
               <ProtectedRoute>
                 <Request />
+              </ProtectedRoute>
+            } />
+            <Route path="/transaction/:id" element={
+              <ProtectedRoute>
+                <TransactionDetails />
               </ProtectedRoute>
             } />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}

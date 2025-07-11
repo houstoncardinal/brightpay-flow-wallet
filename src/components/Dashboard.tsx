@@ -180,7 +180,11 @@ const Dashboard = () => {
           <CardContent className="pt-0">
             <div className="space-y-2">
               {mockTransactions.map((transaction, index) => (
-                <div key={transaction.id} className="flex items-center justify-between p-3 rounded-lg bg-white/60 hover:bg-white/80 transition-all cursor-pointer group border border-gray-100/50">
+                <div 
+                  key={transaction.id} 
+                  onClick={() => navigate(`/transaction/${transaction.id}`)}
+                  className="flex items-center justify-between p-3 rounded-lg bg-white/60 hover:bg-white/80 transition-all cursor-pointer group border border-gray-100/50"
+                >
                   <div className="flex items-center gap-3">
                     <div className={`w-8 h-8 rounded-lg flex items-center justify-center ${
                       transaction.type === 'received' ? 'bg-emerald-100' :
