@@ -41,12 +41,11 @@ const RequestPage = () => {
               <h1 className="text-xl font-bold text-foreground">Request Money</h1>
               <p className="text-sm text-muted-foreground">Create a payment request</p>
             </div>
+          </div>
         </div>
       </div>
-      <MobileBottomNav />
-    </div>
 
-      <div className="p-4 space-y-6">
+      <div className="p-4 space-y-6 pb-24">
         {/* Amount Input */}
         <Card className="glass-card border-0 shadow-lg">
           <CardHeader className="pb-4">
@@ -233,6 +232,9 @@ const RequestPage = () => {
           </CardContent>
         </Card>
       </div>
+
+      {/* Mobile Bottom Navigation */}
+      <MobileBottomNav />
     </div>
   );
 };

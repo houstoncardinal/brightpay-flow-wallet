@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import MobileBottomNav from '@/components/MobileBottomNav';
 import { 
   ArrowLeft, QrCode, Camera, Upload, 
   Flashlight, FlashlightOff, RotateCcw
@@ -157,6 +158,9 @@ const ScanPage = () => {
           100% { transform: translateY(0); }
         }
       `}</style>
+
+      {/* Mobile Bottom Navigation */}
+      <MobileBottomNav />
     </div>
   );
 };

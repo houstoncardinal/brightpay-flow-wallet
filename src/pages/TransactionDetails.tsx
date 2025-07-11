@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
+import MobileBottomNav from "@/components/MobileBottomNav";
 
 // Mock transaction data - in a real app, this would come from an API
 const mockTransactionDetails = {
@@ -254,6 +255,9 @@ export default function TransactionDetails() {
           </Button>
         </div>
       </div>
+
+      {/* Mobile Bottom Navigation */}
+      <MobileBottomNav />
     </div>
   );
 }

@@ -172,9 +172,10 @@ const Dashboard = () => {
               variant="ghost" 
               size="sm" 
               className="h-9 w-9 p-0 hover-glow"
-              onClick={() => navigate('/settings')}
+              onClick={signOut}
+              title="Sign Out"
             >
-              <Settings className="h-4 w-4" />
+              <LogOut className="h-4 w-4" />
             </Button>
           </div>
         </div>

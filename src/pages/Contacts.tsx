@@ -5,6 +5,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Avatar, AvatarFallback } from '@/components/ui/avatar';
 import { Badge } from '@/components/ui/badge';
+import MobileBottomNav from '@/components/MobileBottomNav';
 import { 
   ArrowLeft, Search, Plus, Star, Send, 
   ArrowDown, MessageCircle, Phone, Mail
@@ -166,6 +167,9 @@ const ContactsPage = () => {
           </CardContent>
         </Card>
       </div>
+
+      {/* Mobile Bottom Navigation */}
+      <MobileBottomNav />
     </div>
   );
 };
