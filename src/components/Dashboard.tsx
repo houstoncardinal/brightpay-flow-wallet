@@ -1,169 +1,322 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '@/contexts/AuthContext';
-import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { Progress } from '@/components/ui/progress';
 import { Separator } from '@/components/ui/separator';
-import { 
-  ArrowUp, ArrowDown, Plus, QrCode, Users, CreditCard, LogOut, 
-  TrendingUp, TrendingDown, Eye, EyeOff, Wallet, Send, 
-  MoreHorizontal, Star, Clock, Filter, Search, Bell,
-  ChevronRight, DollarSign, PieChart, BarChart3, Settings
+import MobileBottomNav from '@/components/MobileBottomNav';
+import logoImage from '@/assets/logo.png';
+import {
+  Send,
+  ArrowDown,
+  Plus,
+  TrendingUp,
+  TrendingDown,
+  ArrowUp,
+  Clock,
+  Filter,
+  Search,
+  QrCode,
+  SplitSquareHorizontal,
+  Bell,
+  Settings,
+  Eye,
+  EyeOff,
+  CreditCard,
+  Zap,
+  Target,
+  Gift,
+  Users,
+  LogOut,
+  Wallet,
+  MoreHorizontal,
+  Star,
+  ChevronRight,
+  DollarSign,
+  PieChart,
+  BarChart3
 } from 'lucide-react';
-
-import MobileNavbar from './MobileNavbar';
 
 const Dashboard = () => {
   const { user, signOut } = useAuth();
   const [balanceVisible, setBalanceVisible] = useState(true);
+  const [currentTime, setCurrentTime] = useState(new Date());
   const navigate = useNavigate();
+
+  // Update time every minute
+  useEffect(() => {
+    const timer = setInterval(() => setCurrentTime(new Date()), 60000);
+    return () => clearInterval(timer);
+  }, []);
 
   const mockBalance = "$11,522";
   const mockSavings = "$1,234.89";
   const mockSpending = "$567.23";
   
   const mockTransactions = [
-    { id: 1, type: 'received', amount: '+$25.00', from: 'Sarah Chen', time: '2:34 PM', category: 'Transfer', status: 'completed' },
-    { id: 2, type: 'sent', amount: '-$12.50', to: 'Starbucks Coffee', time: '11:45 AM', category: 'Food', status: 'completed' },
-    { id: 3, type: 'received', amount: '+$100.00', from: 'Alex Rodriguez', time: 'Yesterday', category: 'Payment', status: 'completed' },
-    { id: 4, type: 'sent', amount: '-$45.99', to: 'Uber Ride', time: 'Yesterday', category: 'Transport', status: 'completed' },
-    { id: 5, type: 'pending', amount: '-$89.50', to: 'Amazon', time: '2 days ago', category: 'Shopping', status: 'pending' },
-    { id: 6, type: 'received', amount: '+$200.00', from: 'Maria Silva', time: '3 days ago', category: 'Transfer', status: 'completed' },
-  ];
-
-  const quickActions = [
-    { icon: Send, label: 'Send', color: 'blue', count: 3, path: '/send' },
-    { icon: ArrowDown, label: 'Request', color: 'emerald', count: 1, path: '/request' },
-    { icon: QrCode, label: 'Scan', color: 'purple', count: null, path: '/scan' },
-    { icon: Users, label: 'Split', color: 'cyan', count: 2, path: '/contacts' },
+    { 
+      id: 'txn-001', 
+      type: 'received', 
+      amount: '+$124.50', 
+      from: 'Sarah Johnson', 
+      to: 'You',
+      time: '2m ago', 
+      category: 'Personal', 
+      status: 'completed',
+      description: 'Lunch split payment'
+    },
+    { 
+      id: 'txn-002', 
+      type: 'sent', 
+      amount: '-$89.20', 
+      from: 'You',
+      to: 'Mike Chen', 
+      time: '1h ago', 
+      category: 'Bills', 
+      status: 'completed',
+      description: 'Utility bill payment'
+    },
+    { 
+      id: 'txn-003', 
+      type: 'pending', 
+      amount: '-$45.00', 
+      from: 'You',
+      to: 'Emma Davis', 
+      time: '3h ago', 
+      category: 'Personal', 
+      status: 'pending',
+      description: 'Movie tickets'
+    },
   ];
 
   const stats = [
-    { label: 'This Month', value: '+$1,245', trend: 'up', percent: '+12%' },
-    { label: 'Last Month', value: '$2,156', trend: 'down', percent: '-3%' },
-    { label: 'Avg/Week', value: '$286', trend: 'up', percent: '+8%' },
+    { label: 'This Month', value: '+$2,847.20', percent: '+12.5%', trend: 'up' },
+    { label: 'Savings Goal', value: '78%', percent: '+5.2%', trend: 'up' },
+    { label: 'Cash Back', value: '$47.92', percent: '+8.1%', trend: 'up' },
   ];
 
+  const quickActions = [
+    { 
+      name: 'Send Money', 
+      icon: Send, 
+      color: 'bg-gradient-to-br from-blue-500 to-blue-600',
+      glow: 'glow-blue',
+      action: () => navigate('/send')
+    },
+    { 
+      name: 'Request', 
+      icon: ArrowDown, 
+      color: 'bg-gradient-to-br from-emerald-500 to-emerald-600',
+      glow: 'glow-emerald',
+      action: () => navigate('/request')
+    },
+    { 
+      name: 'Scan QR', 
+      icon: QrCode, 
+      color: 'bg-gradient-to-br from-purple-500 to-purple-600',
+      glow: 'glow-blue',
+      action: () => navigate('/scan')
+    },
+    { 
+      name: 'Split Bill', 
+      icon: SplitSquareHorizontal, 
+      color: 'bg-gradient-to-br from-orange-500 to-orange-600',
+      glow: 'glow-green',
+      action: () => navigate('/send')
+    },
+  ];
+
+  const getGreeting = () => {
+    const hour = currentTime.getHours();
+    if (hour < 12) return 'Good morning';
+    if (hour < 17) return 'Good afternoon';
+    return 'Good evening';
+  };
+
+  const formatBalance = (balance: string) => {
+    return balanceVisible ? balance : '••••••';
+  };
+
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-emerald-50">
-      {/* Header Navigation */}
-      <div className="bg-white/80 backdrop-blur-lg border-b border-gray-200/50 sticky top-0 z-50">
-        <div className="px-4 py-3">
-          <div className="flex justify-between items-center">
-            <div className="flex items-center gap-3">
-              <div className="w-8 h-8 bg-gradient-to-r from-blue-500 to-emerald-500 rounded-lg flex items-center justify-center">
-                <Wallet className="h-4 w-4 text-white" />
-              </div>
-              <div>
-                <h1 className="text-lg font-bold text-foreground">BrightPay</h1>
-                <p className="text-xs text-muted-foreground">Good afternoon, {user?.email?.split('@')[0]}</p>
-              </div>
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-emerald-50">
+      {/* Header */}
+      <div className="sticky top-0 bg-white/80 backdrop-blur-xl border-b border-gray-100/50 z-30 shadow-sm">
+        <div className="flex items-center justify-between p-4">
+          <div className="flex items-center gap-3">
+            <div className="relative">
+              <img 
+                src={logoImage} 
+                alt="BrightPay Logo" 
+                className="h-8 w-8 rounded-lg shadow-md hover-lift"
+              />
+              <div className="absolute -top-1 -right-1 w-3 h-3 bg-gradient-to-r from-emerald-400 to-emerald-500 rounded-full animate-pulse-slow" />
             </div>
-            <div className="flex items-center gap-2">
-              <Button variant="ghost" size="sm" className="h-8 w-8 p-0">
-                <Bell className="h-4 w-4" />
-              </Button>
-              <Button variant="ghost" size="sm" className="h-8 w-8 p-0">
-                <Settings className="h-4 w-4" />
-              </Button>
-              <Button variant="ghost" size="sm" onClick={signOut} className="h-8 w-8 p-0">
-                <LogOut className="h-4 w-4" />
-              </Button>
+            <div>
+              <h1 className="text-lg font-bold gradient-text">BrightPay</h1>
+              <p className="text-xs text-muted-foreground">{getGreeting()}, {user?.email?.split('@')[0] || 'User'}</p>
             </div>
+          </div>
+          <div className="flex items-center gap-2">
+            <Button 
+              variant="ghost" 
+              size="sm" 
+              className="h-9 w-9 p-0 relative hover-glow"
+            >
+              <Bell className="h-4 w-4" />
+              <div className="absolute -top-1 -right-1 w-2 h-2 bg-red-500 rounded-full" />
+            </Button>
+            <Button 
+              variant="ghost" 
+              size="sm" 
+              className="h-9 w-9 p-0 hover-glow"
+              onClick={() => navigate('/settings')}
+            >
+              <Settings className="h-4 w-4" />
+            </Button>
           </div>
         </div>
       </div>
 
-      <div className="p-4 space-y-4">
-        {/* Balance Overview */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
-          <Card className="lg:col-span-2 glass-card border-0 shadow-lg">
-            <CardHeader className="pb-3">
-              <div className="flex justify-between items-center">
-                <CardTitle className="text-sm font-medium text-muted-foreground">Total Balance</CardTitle>
-                <Button 
-                  variant="ghost" 
-                  size="sm" 
-                  onClick={() => setBalanceVisible(!balanceVisible)}
-                  className="h-6 w-6 p-0"
-                >
-                  {balanceVisible ? <Eye className="h-3 w-3" /> : <EyeOff className="h-3 w-3" />}
-                </Button>
-              </div>
-            </CardHeader>
-            <CardContent className="pt-0">
-              <div className="text-3xl font-bold text-foreground mb-4">
-                {balanceVisible ? mockBalance : '••••••'}
-              </div>
-              <div className="grid grid-cols-2 gap-4 mb-4">
-                <div className="bg-emerald-50 rounded-lg p-3">
-                  <p className="text-xs text-emerald-600 font-medium">Savings</p>
-                  <p className="text-lg font-semibold text-emerald-700">
-                    {balanceVisible ? mockSavings : '••••••'}
-                  </p>
-                </div>
-                <div className="bg-blue-50 rounded-lg p-3">
-                  <p className="text-xs text-blue-600 font-medium">This Month</p>
-                  <p className="text-lg font-semibold text-blue-700">
-                    {balanceVisible ? mockSpending : '••••••'}
-                  </p>
+      <div className="p-4 pb-32 space-y-6">
+        {/* Balance Card */}
+        <Card className="glass-card border-0 shadow-xl hover-lift overflow-hidden relative">
+          <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 to-emerald-500/5" />
+          <CardContent className="pt-6 relative">
+            <div className="flex justify-between items-start mb-4">
+              <div>
+                <p className="text-sm text-muted-foreground mb-1">Total Balance</p>
+                <div className="flex items-center gap-2">
+                  <h2 className="text-3xl font-bold tracking-tight">
+                    {formatBalance(mockBalance)}
+                  </h2>
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    onClick={() => setBalanceVisible(!balanceVisible)}
+                    className="h-6 w-6 p-0 hover:bg-gray-100 rounded-full"
+                  >
+                    {balanceVisible ? (
+                      <Eye className="h-3 w-3" />
+                    ) : (
+                      <EyeOff className="h-3 w-3" />
+                    )}
+                  </Button>
                 </div>
               </div>
-              <div className="flex gap-2">
-                <Button 
-                  size="sm" 
-                  onClick={() => navigate('/send')}
-                  className="flex-1 h-8 bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white text-xs"
-                >
-                  <Send className="h-3 w-3 mr-1" />
-                  Send
-                </Button>
-                <Button 
-                  size="sm" 
-                  variant="outline" 
-                  onClick={() => navigate('/request')}
-                  className="flex-1 h-8 border-emerald-200 text-emerald-600 hover:bg-emerald-50 text-xs"
-                >
-                  <ArrowDown className="h-3 w-3 mr-1" />
-                  Request
-                </Button>
-                <Button 
-                  size="sm" 
-                  variant="outline" 
-                  onClick={() => navigate('/send')}
-                  className="h-8 w-8 p-0 border-gray-200"
-                >
-                  <Plus className="h-3 w-3" />
-                </Button>
+              <div className="text-right">
+                <div className="flex items-center gap-1 text-emerald-600">
+                  <TrendingUp className="h-3 w-3" />
+                  <span className="text-sm font-medium">+5.2%</span>
+                </div>
+                <p className="text-xs text-muted-foreground">vs last month</p>
               </div>
-            </CardContent>
-          </Card>
+            </div>
+            
+            {/* Mini Stats */}
+            <div className="grid grid-cols-2 gap-4 mb-4">
+              <div className="bg-white/50 rounded-lg p-3 border border-white/20">
+                <p className="text-xs text-muted-foreground">Savings</p>
+                <p className="text-lg font-semibold text-emerald-600">{formatBalance(mockSavings)}</p>
+              </div>
+              <div className="bg-white/50 rounded-lg p-3 border border-white/20">
+                <p className="text-xs text-muted-foreground">This Month</p>
+                <p className="text-lg font-semibold text-blue-600">{formatBalance(mockSpending)}</p>
+              </div>
+            </div>
 
-          {/* Quick Stats */}
-          <Card className="glass-card border-0 shadow-lg">
-            <CardHeader className="pb-3">
-              <CardTitle className="text-sm font-medium text-muted-foreground">Statistics</CardTitle>
-            </CardHeader>
-            <CardContent className="pt-0 space-y-3">
-              {stats.map((stat, index) => (
-                <div key={index} className="flex justify-between items-center">
-                  <div>
-                    <p className="text-xs text-muted-foreground">{stat.label}</p>
-                    <p className="text-sm font-semibold">{stat.value}</p>
+            {/* Action Buttons */}
+            <div className="flex gap-2">
+              <Button 
+                size="sm" 
+                onClick={() => navigate('/send')}
+                className="flex-1 h-9 bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white text-xs shadow-lg hover:shadow-xl transition-all duration-300"
+              >
+                <Send className="h-3 w-3 mr-1" />
+                Send
+              </Button>
+              <Button 
+                size="sm" 
+                variant="outline" 
+                onClick={() => navigate('/request')}
+                className="flex-1 h-9 border-emerald-200 text-emerald-600 hover:bg-emerald-50 text-xs shadow-sm hover:shadow-md transition-all duration-300"
+              >
+                <ArrowDown className="h-3 w-3 mr-1" />
+                Request
+              </Button>
+              <Button 
+                size="sm" 
+                variant="outline" 
+                onClick={() => navigate('/send')}
+                className="h-9 w-9 p-0 border-gray-200 shadow-sm hover:shadow-md transition-all duration-300"
+              >
+                <Plus className="h-3 w-3" />
+              </Button>
+            </div>
+          </CardContent>
+        </Card>
+
+        {/* Quick Actions */}
+        <div className="space-y-3">
+          <div className="flex items-center justify-between">
+            <h3 className="text-lg font-semibold">Quick Actions</h3>
+            <Button variant="ghost" size="sm" className="text-xs text-muted-foreground">
+              View All
+              <ChevronRight className="h-3 w-3 ml-1" />
+            </Button>
+          </div>
+          
+          <div className="grid grid-cols-4 gap-3">
+            {quickActions.map((action, index) => {
+              const Icon = action.icon;
+              return (
+                <div
+                  key={index}
+                  onClick={action.action}
+                  className="flex flex-col items-center gap-2 p-4 bg-white/60 rounded-xl border border-white/20 hover:bg-white/80 transition-all duration-300 cursor-pointer group hover-lift"
+                >
+                  <div className={`w-12 h-12 rounded-xl ${action.color} ${action.glow} flex items-center justify-center shadow-lg group-hover:shadow-xl transition-all duration-300`}>
+                    <Icon className="h-5 w-5 text-white" />
                   </div>
-                  <div className={`flex items-center gap-1 text-xs ${stat.trend === 'up' ? 'text-emerald-600' : 'text-red-500'}`}>
-                    {stat.trend === 'up' ? <TrendingUp className="h-3 w-3" /> : <TrendingDown className="h-3 w-3" />}
-                    {stat.percent}
-                  </div>
+                  <span className="text-xs font-medium text-center leading-tight">
+                    {action.name}
+                  </span>
                 </div>
-              ))}
-            </CardContent>
-          </Card>
+              );
+            })}
+          </div>
         </div>
 
-        {/* Transactions */}
-        <Card className="glass-card border-0 shadow-lg">
+        {/* Stats */}
+        <Card className="glass-card border-0 shadow-lg hover-lift">
+          <CardHeader className="pb-3">
+            <div className="flex items-center justify-between">
+              <CardTitle className="text-base font-semibold">Financial Overview</CardTitle>
+              <Button variant="ghost" size="sm" className="h-7 w-7 p-0">
+                <BarChart3 className="h-3 w-3" />
+              </Button>
+            </div>
+          </CardHeader>
+          <CardContent className="pt-0 space-y-4">
+            {stats.map((stat, index) => (
+              <div key={index} className="flex justify-between items-center p-3 bg-white/40 rounded-lg border border-white/20">
+                <div>
+                  <p className="text-xs text-muted-foreground">{stat.label}</p>
+                  <p className="text-sm font-semibold">{stat.value}</p>
+                </div>
+                <div className={`flex items-center gap-1 text-xs ${stat.trend === 'up' ? 'text-emerald-600' : 'text-red-500'}`}>
+                  {stat.trend === 'up' ? <TrendingUp className="h-3 w-3" /> : <TrendingDown className="h-3 w-3" />}
+                  {stat.percent}
+                </div>
+              </div>
+            ))}
+          </CardContent>
+        </Card>
+
+        {/* Recent Activity */}
+        <Card className="glass-card border-0 shadow-lg hover-lift">
           <CardHeader className="pb-3">
             <div className="flex justify-between items-center">
               <CardTitle className="text-base font-semibold">Recent Activity</CardTitle>
@@ -183,12 +336,12 @@ const Dashboard = () => {
                 <div 
                   key={transaction.id} 
                   onClick={() => navigate(`/transaction/${transaction.id}`)}
-                  className="flex items-center justify-between p-3 rounded-lg bg-white/60 hover:bg-white/80 transition-all cursor-pointer group border border-gray-100/50"
+                  className="flex items-center justify-between p-3 rounded-xl bg-white/60 hover:bg-white/80 transition-all duration-300 cursor-pointer group border border-gray-100/50 hover:border-blue-200/50 hover-lift"
                 >
                   <div className="flex items-center gap-3">
-                    <div className={`w-8 h-8 rounded-lg flex items-center justify-center ${
-                      transaction.type === 'received' ? 'bg-emerald-100' :
-                      transaction.type === 'pending' ? 'bg-orange-100' : 'bg-blue-100'
+                    <div className={`w-10 h-10 rounded-xl flex items-center justify-center shadow-md ${
+                      transaction.type === 'received' ? 'bg-gradient-to-br from-emerald-100 to-emerald-200' :
+                      transaction.type === 'pending' ? 'bg-gradient-to-br from-orange-100 to-orange-200' : 'bg-gradient-to-br from-blue-100 to-blue-200'
                     }`}>
                       {transaction.type === 'received' ? (
                         <ArrowDown className="h-4 w-4 text-emerald-600" />
@@ -203,7 +356,7 @@ const Dashboard = () => {
                         {transaction.type === 'received' ? transaction.from : transaction.to}
                       </p>
                       <div className="flex items-center gap-2">
-                        <Badge variant="secondary" className="text-xs h-4 px-1">
+                        <Badge variant="secondary" className="text-xs h-5 px-2 bg-gray-100/50">
                           {transaction.category}
                         </Badge>
                         <span className="text-xs text-muted-foreground">{transaction.time}</span>
@@ -224,26 +377,46 @@ const Dashboard = () => {
                         {transaction.status}
                       </p>
                     </div>
-                    <ChevronRight className="h-4 w-4 text-muted-foreground group-hover:text-foreground transition-colors" />
+                    <ChevronRight className="h-4 w-4 text-muted-foreground group-hover:text-blue-500 transition-colors" />
                   </div>
                 </div>
               ))}
             </div>
+            
             <Separator className="my-4" />
-            <Button variant="ghost" className="w-full text-sm text-blue-600 hover:text-blue-700 hover:bg-blue-50">
+            
+            <Button 
+              variant="ghost" 
+              className="w-full text-sm text-muted-foreground hover:text-blue-600 hover:bg-blue-50/50"
+              onClick={() => navigate('/activity')}
+            >
               View All Transactions
+              <ChevronRight className="h-4 w-4 ml-1" />
             </Button>
+          </CardContent>
+        </Card>
+
+        {/* Savings Goal Progress */}
+        <Card className="glass-card border-0 shadow-lg hover-lift">
+          <CardContent className="pt-6">
+            <div className="flex items-center justify-between mb-3">
+              <div className="flex items-center gap-2">
+                <Target className="h-4 w-4 text-emerald-600" />
+                <h3 className="text-sm font-semibold">Savings Goal</h3>
+              </div>
+              <span className="text-xs text-muted-foreground">78% complete</span>
+            </div>
+            <Progress value={78} className="h-2 mb-2" />
+            <div className="flex justify-between text-xs text-muted-foreground">
+              <span>$1,234 saved</span>
+              <span>$1,600 goal</span>
+            </div>
           </CardContent>
         </Card>
       </div>
 
-      {/* Floating Action Button */}
-      <Button 
-        size="icon" 
-        className="fixed bottom-6 right-6 h-12 w-12 rounded-xl bg-gradient-to-r from-indigo-500 to-purple-600 hover:from-indigo-600 hover:to-purple-700 text-white shadow-xl glow-blue hover-scale"
-      >
-        <Plus className="h-5 w-5" />
-      </Button>
+      {/* Mobile Bottom Navigation */}
+      <MobileBottomNav />
     </div>
   );
 };
